@@ -1,3 +1,4 @@
 {
-    "module": 1
+    "initialModule": 1,
+    "toExecute": 1
 }
