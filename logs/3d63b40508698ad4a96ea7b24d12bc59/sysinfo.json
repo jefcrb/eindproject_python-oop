@@ -1,10 +1,10 @@
 {
     "id": "3d63b40508698ad4a96ea7b24d12bc59",
     "hostname": "jefslaptop",
-    "operating_system": "Windows 10.0.22000",
+    "operating_system": "Windows jefslaptop",
     "architecture": "AMD64",
     "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
     "public_ip": "169.254.99.2",
     "disk_total": 970261000192,
-    "disk_used": 831310024704
+    "disk_used": 831317204992
 }

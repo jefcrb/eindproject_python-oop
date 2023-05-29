@@ -10,7 +10,7 @@ release = platform.release()
 version = platform.version()
 architecture = platform.machine()
 processor = platform.processor()
-id = hashlib.md5(getmac.get_mac_address().encode()).hexdigest
+id = hashlib.md5(getmac.get_mac_address().encode()).hexdigest()
 
 hostname = socket.gethostname()
 ip_address = socket.gethostbyname(hostname)

